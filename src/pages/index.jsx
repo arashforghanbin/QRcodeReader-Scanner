@@ -7,11 +7,14 @@ import { useEffect } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [cam,setCam] = useState("")
   const codeReader = new BrowserQRCodeReader();
   useEffect(() => {
     const detectInputDevices = async () => {
       const videoInputDevices = await BrowserCodeReader.listVideoInputDevices();
-      console.log(videoInputDevices);
+      console.log(videoInputDevices)
+      const selectedDevice  = videoInputDevices[0].deviceId
+      setCam(selectedDevice)
     };
     detectInputDevices();
   }, []);
@@ -23,7 +26,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        <video id={cam}></video>
+      </main>
     </>
   );
 }
