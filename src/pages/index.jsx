@@ -20,48 +20,44 @@ export default function Home() {
     detectInputDevices();
   }, []);
 
-  function decodeContinuously(cam) {
-    codeReader.decodeFromInputVideoDeviceContinuously(
-      cam,
-      "cam",
-      (result, err) => {
-        if (result) {
-          // properly decoded qr code
-          console.log("Found QR code!", result);
-          setCode(result.text);
+  const decodeContinuously = (cam) => {
+    codeReader.decodeFromVideoDevice(cam, "cam", (result, err) => {
+      if (result) {
+        // properly decoded qr code
+        console.log("Found QR code!", result);
+        setCode(result.text);
+      }
+
+      if (err) {
+        setCode("");
+
+        // As long as this error belongs into one of the following categories
+        // the code reader is going to continue as excepted. Any other error
+        // will stop the decoding loop.
+        //
+        // Excepted Exceptions:
+        //
+        //  - NotFoundException
+        //  - ChecksumException
+        //  - FormatException
+
+        if (err instanceof NotFoundException) {
+          console.log("No QR code found.");
         }
 
-        if (err) {
-          setCode("");
+        if (err instanceof ChecksumException) {
+          console.log("A code was found, but it's read value was not valid.");
+        }
 
-          // As long as this error belongs into one of the following categories
-          // the code reader is going to continue as excepted. Any other error
-          // will stop the decoding loop.
-          //
-          // Excepted Exceptions:
-          //
-          //  - NotFoundException
-          //  - ChecksumException
-          //  - FormatException
-
-          if (err instanceof NotFoundException) {
-            console.log("No QR code found.");
-          }
-
-          if (err instanceof ChecksumException) {
-            console.log("A code was found, but it's read value was not valid.");
-          }
-
-          if (err instanceof FormatException) {
-            console.log("A code was found, but it was in a invalid format.");
-          }
+        if (err instanceof FormatException) {
+          console.log("A code was found, but it was in a invalid format.");
         }
       }
-    );
-  }
+    });
+  };
 
   useEffect(() => {
-    decodeContinuously(cam);
+    if (cam !== "") decodeContinuously(cam);
   }, [cam]);
   return (
     <>
