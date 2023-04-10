@@ -29,6 +29,7 @@ export default function Home() {
       }
 
       if (err) {
+        console.log(err)
         setCode("");
 
         // As long as this error belongs into one of the following categories
@@ -41,17 +42,17 @@ export default function Home() {
         //  - ChecksumException
         //  - FormatException
 
-        if (err instanceof NotFoundException) {
-          console.log("No QR code found.");
-        }
+        // if (err instanceof NotFoundException) {
+        //   console.log("No QR code found.");
+        // }
 
-        if (err instanceof ChecksumException) {
-          console.log("A code was found, but it's read value was not valid.");
-        }
+        // if (err instanceof ChecksumException) {
+        //   console.log("A code was found, but it's read value was not valid.");
+        // }
 
-        if (err instanceof FormatException) {
-          console.log("A code was found, but it was in a invalid format.");
-        }
+        // if (err instanceof FormatException) {
+        //   console.log("A code was found, but it was in a invalid format.");
+        // }
       }
     });
   };
