@@ -69,8 +69,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <h1>Scan your QR code</h1>
         <video id={cam} width={250} height={250}></video>
-        <h3>Result</h3>
+        <h3>Result:</h3>
         <p>{code}</p>
       </main>
     </>
