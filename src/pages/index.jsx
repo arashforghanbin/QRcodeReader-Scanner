@@ -14,7 +14,7 @@ export default function Home() {
     const detectInputDevices = async () => {
       const videoInputDevices = await BrowserCodeReader.listVideoInputDevices();
       console.log(videoInputDevices);
-      const selectedDevice = videoInputDevices[0]?.deviceId;
+      const selectedDevice = videoInputDevices[1]?.deviceId;
       setCam(selectedDevice);
     };
     detectInputDevices();
