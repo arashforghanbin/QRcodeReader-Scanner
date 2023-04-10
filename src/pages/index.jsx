@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@component/styles/Home.module.css";
 import { BrowserCodeReader, BrowserQRCodeReader } from "@zxing/browser";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
