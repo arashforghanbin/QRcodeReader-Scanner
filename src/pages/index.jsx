@@ -70,7 +70,8 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <video id={cam} width={250} height={250}></video>
-        <p>Result:{code}</p>
+        <h3>Result</h3>
+        <p>{code}</p>
       </main>
     </>
   );
