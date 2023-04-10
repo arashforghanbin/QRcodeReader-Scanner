@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   const decodeContinuously = (cam) => {
-    codeReader.decodeFromVideoDevice(cam, "cam", (result, err) => {
+    codeReader.decodeFromVideoDevice(cam, cam, (result, err) => {
       if (result) {
         // properly decoded qr code
         console.log("Found QR code!", result);
